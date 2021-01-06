@@ -1,2 +1,2 @@
 # SnakeConsoleGame
-## SoftUni's workshop
+### SoftUni's workshop
