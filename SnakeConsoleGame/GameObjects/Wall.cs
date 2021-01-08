@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace SnakeConsoleGame.GameObjects
+﻿namespace SnakeConsoleGame.GameObjects
 {
+    using System;
+
     public class Wall : Point
     {
         private const char WallSymbol = '\u25A0';  //■
@@ -12,23 +12,23 @@ namespace SnakeConsoleGame.GameObjects
             SetHorizontalLine(0);
             SetHorizontalLine(TopY - 1);
 
-            SetVerticallLine(0);
-            SetVerticallLine(LeftX);
+            SetVerticalLine(0);
+            SetVerticalLine(LeftX);
         }
 
-        private void SetHorizontalLine(int topY)
+        private void SetHorizontalLine(int top)
         {
             for (int leftX = 0; leftX < this.LeftX; leftX++)
             {
-                Draw(leftX, topY, WallSymbol);
+                Draw(leftX, top, WallSymbol);
             }
         }
 
-        private void SetVerticallLine(int leftX)
+        private void SetVerticalLine(int left)
         {
             for (int topY = 0; topY < this.TopY; topY++)
             {
-                Draw(leftX, topY, WallSymbol);
+                Draw(left, topY, WallSymbol);
             }
         }
     }

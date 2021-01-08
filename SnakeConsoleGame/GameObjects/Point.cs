@@ -20,9 +20,9 @@
             Console.Write(symbol);
         }
 
-        public void Draw(int leftX, int topY, char symbol)
+        public void Draw(int left, int top, char symbol)
         {
-            Console.SetCursorPosition(leftX, topY);
+            Console.SetCursorPosition(left, top);
             Console.Write(symbol);
         }
     }
