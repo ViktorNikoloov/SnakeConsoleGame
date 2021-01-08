@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SnakeConsoleGame.GameObjects.Food
+﻿namespace SnakeConsoleGame.GameObjects.Food
 {
-    class FoodHash
+    public class FoodHash : Food
     {
+        private const char FoodSymbol = '#';
+        private const int Points = 2;
+
+        public FoodHash(Wall wall) 
+            : base(wall, FoodSymbol, Points)
+        {
+
+        }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SnakeConsoleGame.GameObjects.Food
+﻿namespace SnakeConsoleGame.GameObjects.Food
 {
-    class FoodAsterisk
+    public class FoodAsterisk : Food
     {
+        private const char FoodSymbol = '*';
+        private const int Points = 1;
+
+        public FoodAsterisk(Wall wall) 
+            : base(wall, FoodSymbol, Points)
+        {
+
+        }
     }
 }
