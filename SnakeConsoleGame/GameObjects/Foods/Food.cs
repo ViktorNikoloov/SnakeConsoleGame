@@ -44,7 +44,7 @@
             Console.BackgroundColor = ConsoleColor.White;
         }
 
-        public bool isFoodPoint(Point snake)
+        public bool IsFoodPoint(Point snake)
             => LeftX == snake.LeftX
             && TopY == snake.TopY;
     }

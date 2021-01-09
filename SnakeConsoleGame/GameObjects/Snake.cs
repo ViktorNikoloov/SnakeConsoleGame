@@ -25,18 +25,22 @@
             foodIndex = RandomFoodNumber;
             snakeElements = new Queue<Point>();
 
+            GetFoods();
             CreateSnake();
+
         }
 
         private void CreateSnake()
         {
-            for (int i = 0; i <= 6; i++)
+            for (int leftX = 0; leftX < 6; leftX++)
             {
-                var point = new Point(LeftX + i, TopY);
+                var point = new Point(LeftX + leftX, TopY);
                 point.Draw(SnakeSymbol);
 
                 snakeElements.Enqueue(point);
             }
+
+            foods[foodIndex].SetRandomPosition(snakeElements);
         }
 
         public int RandomFoodNumber
@@ -53,7 +57,9 @@
                 return false;
             }
 
-            if (snakeElements.Any(x=> LeftX == LeftX && TopY==TopY))
+            bool isPointOfSnake = snakeElements.Any(x => x.LeftX == LeftX && x.TopY == TopY);
+
+            if (isPointOfSnake)
             {
                 return false;
             }
@@ -62,35 +68,34 @@
             snakeNewHead.Draw(SnakeSymbol);
             snakeElements.Enqueue(snakeNewHead);
 
-            if (foods[foodIndex].isFoodPoint(snakeNewHead))
+            if (foods[foodIndex].IsFoodPoint(snakeNewHead))
             {
                 GetNextDirection(snakeNewHead, direction);
                 snakeNewHead = new Point(LeftX, TopY);
                 snakeNewHead.Draw(SnakeSymbol);
                 snakeElements.Enqueue(snakeNewHead);
+
+                foods[foodIndex].SetRandomPosition(snakeElements);
+
             }
 
             var tail = snakeElements.Dequeue();
             tail.Draw(' ');
 
-            
-
-
             return true;
         }
-
-        private void GetNextDirection(Point head, Point direction)
-        {
-            LeftX = head.LeftX + direction.LeftX;
-            TopY = head.TopY + direction.TopY;
-        }
-
 
         private void GetFoods()
         {
             foods[0] = new FoodHash(wall);
             foods[1] = new FoodDollar(wall);
             foods[2] = new FoodAsterisk(wall);
+        }
+
+        private void GetNextDirection(Point head, Point direction)
+        {
+            LeftX = head.LeftX + direction.LeftX;
+            TopY = head.TopY + direction.TopY;
         }
     }
 }
