@@ -42,7 +42,7 @@ namespace SnakeConsoleGame.Core
                     GetNextDirection();
                 }
 
-                var canMove = snake.isMoving(directionPoints[(int)direction]);
+                var canMove = snake.IsMoving(directionPoints[(int)direction]);
 
                 if (!canMove)
                 {

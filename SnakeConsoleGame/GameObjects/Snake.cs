@@ -6,7 +6,7 @@
 
     using Foods;
 
-    public class Snake : Point
+    public class Snake 
     {
         private const char SnakeSymbol = '\u25CF';
 
@@ -15,9 +15,10 @@
         private readonly Wall wall;
 
         private int foodIndex;
+        private int nextLeftX;
+        private int nextTopY;
 
-        public Snake(Wall wall, int leftX, int topY) 
-            : base(leftX, topY)
+        public Snake(Wall wall) 
         {
             this.wall = wall;
             foods = new Food[3];
@@ -56,7 +57,7 @@
                 return false;
             }
 
-            Point snakeNewHead = new Point(LeftX, TopY);
+            Point snakeNewHead = new Point(nextLeftX, nextTopY);
 
             if (wall.IsPointOfWall(snakeNewHead))
             {
@@ -96,7 +97,7 @@
 
             for (int i = 0; i < length; i++)
             {
-                snakeElements.Enqueue(new Point(LeftX, TopY));
+                snakeElements.Enqueue(new Point(nextLeftX, nextTopY));
                 GetNextDirection(currentSnakeHead, direction);
             }
 
@@ -108,7 +109,7 @@
         }
 
         private bool IsPointOfSnake()
-        => snakeElements.Any(x => x.LeftX == LeftX && x.TopY == TopY);
+        => snakeElements.Any(x => x.LeftX == nextLeftX && x.TopY == nextTopY);
         
         private void GetFoods()
         {
@@ -119,8 +120,8 @@
 
         private void GetNextDirection(Point snakeHead, Point direction)
         {
-            LeftX = snakeHead.LeftX + direction.LeftX;
-            TopY = snakeHead.TopY + direction.TopY;
+            nextLeftX = snakeHead.LeftX + direction.LeftX;
+            nextTopY = snakeHead.TopY + direction.TopY;
         }
     }
 }
