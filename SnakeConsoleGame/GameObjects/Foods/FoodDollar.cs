@@ -3,10 +3,10 @@
     public class FoodDollar : Food
     {
         private const char FoodSymbol = '$';
-        private const int Points = 2;
+        private const int DollarFoodPoints = 2;
 
         public FoodDollar(Wall wall) 
-            : base(wall, FoodSymbol, Points)
+            : base(wall, FoodSymbol, DollarFoodPoints)
         {
 
         }

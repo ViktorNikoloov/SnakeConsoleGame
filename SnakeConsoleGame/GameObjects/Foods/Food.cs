@@ -1,51 +1,54 @@
 ﻿namespace SnakeConsoleGame.GameObjects.Foods
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
     public abstract class Food : Point
     {
-        private readonly Random random;
         private readonly Wall wall;
+        private readonly Random random;
+        private readonly char foodSymbol;
  
 
-        protected Food(Wall wall, char symbol, int foodPoints)
+        protected Food(Wall wall, char foodSymbol, int foodPoints)
             : base(wall.LeftX, wall.TopY)
         {
-            Symbol = symbol;
+            this.wall = wall;
+            this.foodSymbol = foodSymbol;
             FoodPoints = foodPoints;
-            this.wall = wall; 
 
             random = new Random();
         }
 
-        public char Symbol { get;}
-
         public int FoodPoints { get;}
 
-        public void SetRandomPosition(Queue<Point> snake)
+        public void SetRandomPosition(Queue<Point> snakeElements)
         {
-            LeftX = random.Next(1, wall.LeftX - 1);
-            TopY = random.Next(1, wall.TopY - 1);
+            LeftX = random.Next(2, wall.LeftX - 2);
+            TopY = random.Next(2, wall.TopY - 2);
 
-            var isPartOfSnake = snake.Any(x => x.LeftX == LeftX && x.TopY == TopY);
+            bool isPointOfSnake = IsPointOfSnake(snakeElements);
 
-            while (isPartOfSnake)
+            while (isPointOfSnake)
             {
-                LeftX = random.Next(1, wall.LeftX - 1);
-                TopY = random.Next(1, wall.TopY - 1);
+                LeftX = random.Next(2, wall.LeftX - 2);
+                TopY = random.Next(2, wall.TopY - 2);
 
-                isPartOfSnake = snake.Any(x => x.LeftX == LeftX && x.TopY == TopY);
+                isPointOfSnake = IsPointOfSnake(snakeElements);
             }
 
-            Console.BackgroundColor = ConsoleColor.Red;
-            Draw(LeftX, TopY, Symbol);
-            Console.BackgroundColor = ConsoleColor.White;
+            //Console.BackgroundColor = ConsoleColor.Red;
+            Draw(foodSymbol);
+           //Console.BackgroundColor = ConsoleColor.White;
         }
 
         public bool IsFoodPoint(Point snake)
             => LeftX == snake.LeftX
             && TopY == snake.TopY;
+
+        private bool IsPointOfSnake(Queue<Point> snakeElements)
+        => snakeElements.Any(x => x.LeftX == LeftX && x.TopY == TopY);
+        
     }
 }

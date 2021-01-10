@@ -1,6 +1,8 @@
-﻿using SimpleSnake.Enums;
+﻿using SimpleSnake;
+using SimpleSnake.Enums;
 using SnakeConsoleGame.GameObjects;
 using System;
+using System.IO;
 using System.Threading;
 
 namespace SnakeConsoleGame.Core
@@ -9,14 +11,17 @@ namespace SnakeConsoleGame.Core
     {
         private Direction direction;
         private readonly Snake snake;
+        private readonly Wall wall;
 
         private Point[] directionPoints;
         private int sleepTime = 100;
 
-        public Engine(Snake snake)
+        public object DataTime { get; private set; }
+
+        public Engine(Snake snake, Wall wall)
         {
             this.snake = snake;
-
+            this.wall = wall;
             direction = Direction.Right;
 
             directionPoints = new Point[]
@@ -41,7 +46,19 @@ namespace SnakeConsoleGame.Core
 
                 if (!canMove)
                 {
-                    Environment.Exit(0);
+                    Console.SetCursorPosition(0, wall.TopY + 2);
+
+                    //TODO: Refactoring after DB course
+                    File.AppendAllText("../../../Database/Scores.txt", $"Nikolov - {snake.Length} - {DateTime.Now.ToString("MM/dd/yyyy HH:mm")}{Environment.NewLine}");
+
+                    var results = File.ReadAllText("../../../Database/Scores.txt");
+
+                    Console.WriteLine(results);
+                    Console.WriteLine("Game Over!"); 
+
+                    Thread.Sleep(2000);
+
+                    StartUp.Main();
                 }
 
                 Thread.Sleep(sleepTime);
