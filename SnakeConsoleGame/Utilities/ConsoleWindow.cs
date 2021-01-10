@@ -1,4 +1,4 @@
-﻿namespace SimpleSnake.Utilities
+﻿namespace SnakeConsoleGame.Utilities
 {
     using System;
     using System.Text;

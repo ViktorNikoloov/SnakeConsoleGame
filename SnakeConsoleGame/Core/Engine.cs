@@ -1,12 +1,12 @@
-﻿using SimpleSnake;
-using SimpleSnake.Enums;
-using SnakeConsoleGame.GameObjects;
-using System;
-using System.IO;
-using System.Threading;
-
-namespace SnakeConsoleGame.Core
+﻿namespace SnakeConsoleGame.Core
 {
+    using System;
+    using System.IO;
+    using System.Threading;
+
+    using SnakeConsoleGame.Enums;
+    using SnakeConsoleGame.GameObjects;
+
     public class Engine
     {
         private Direction direction;
