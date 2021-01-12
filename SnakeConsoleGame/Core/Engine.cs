@@ -45,21 +45,10 @@
 
                 if (!canMove)
                 {
-                    Console.SetCursorPosition(0, wall.TopY + 2);
-
-                    ////TODO: Refactoring after DB course
+                    ////TODO: Refactoring after DB course !
                     File.AppendAllText("../../../Database/Scores.txt", $"Nikolov - {snake.Length} - {DateTime.Now.ToString("MM/dd/yyyy HH:mm")}{Environment.NewLine}");
 
-                    //var results = File.ReadAllText("../../../Database/Scores.txt");
-
-                    //Console.WriteLine("Top 10 Results");
-                    //Console.WriteLine(results);
-                    //Console.WriteLine("Game Over!"); 
-
-                    //Thread.Sleep(2000);
                     AskUserForRestart();
-
-                    //StartUp.Main();
                 }
 
                 sleepTime -= 0.01;
@@ -75,6 +64,7 @@
 
             Console.SetCursorPosition(leftX, topY);
             Console.Write("Would you like to continue? y/n");
+            Console.WriteLine();
 
             string input = Console.ReadLine();
 

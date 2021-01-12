@@ -53,15 +53,17 @@
         
         public void PlayerInfo()
         {
-            Console.SetCursorPosition(LeftX + 3, 2);
-            Console.WriteLine("Results:");
-
             Console.SetCursorPosition(LeftX + 3, 3);
+            Console.WriteLine("WALL OF GLORY:");
+            Console.WriteLine();
+
+            //TODO: Refactoring after DB course !
+            Console.SetCursorPosition(LeftX + 3, 4);
             string[] results = File.ReadAllLines("../../../Database/Scores.txt").OrderByDescending(x => int.Parse(x.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[1])).Take(10).ToArray();
 
             for (int i = 0; i < results.Length; i++)
             {
-                Console.SetCursorPosition(LeftX + 3, i + 4);
+                Console.SetCursorPosition(LeftX + 3, i + 5);
                 Console.WriteLine($"{i+1}. {results[i]}.");
                 Console.WriteLine();
             }
